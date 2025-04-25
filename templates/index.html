@@ -1,18 +1,68 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>قراءة وتسجيل</title>
-    <script src="/static/script.js" defer></script>
+    <title>Lecture à Voix Haute</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        #target-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #34495e;
+            margin: 20px 0;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        audio {
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: #2d3436;
+        }
+    </style>
 </head>
 <body>
-    <h1>اقرأ الجملة التالية:</h1>
-    <p id="randomText">{{ random_text }}</p>
+    <h1>Lis ce texte à voix haute :</h1>
+    <p id="target-text">{{ random_text }}</p>
 
-    <button id="startBtn">▶️ ابدأ التسجيل</button>
-    <button id="stopBtn" disabled>⏹️ إيقاف</button>
+    <button id="start-btn">Démarrer enregistrement</button>
+    <button id="stop-btn" disabled>Arrêter</button>
 
-    <h2>النتائج:</h2>
-    <div id="resultText"></div>
+    <audio id="audio-playback" controls style="display: none;"></audio>
+
+    <p id="result"></p>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div id="audio-preview"></div>
+
 </body>
 </html>

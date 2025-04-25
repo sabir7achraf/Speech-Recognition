@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify
 import whisper
 import random
 import os
@@ -7,14 +7,13 @@ from datetime import datetime
 app = Flask(__name__)
 model = whisper.load_model("base")
 
-# Phrases arabes simples
+# Liste de phrases simples
 TEXTS = [
-    "الولدُ يقرأُ كتابًا في المكتبة",
-    "ذهبتُ إلى المدرسةِ باكرًا",
-    "السماءُ صافيةٌ اليوم",
-    "أحبُ أن أتعلمَ أشياءً جديدة",
-    "الطفلُ يلعبُ في الحديقة",
-    "أنا أقرأُ القرآنَ كلَّ يوم"
+    "Bonjour, je m'appelle Léa et j'aime lire.",
+    "Le chat dort sur le canapé.",
+    "Aujourd'hui, il fait très beau.",
+    "Le livre est sur la table.",
+    "Je vais à l'école à pied."
 ]
 
 @app.route("/")
@@ -37,13 +36,8 @@ def upload():
     return jsonify({
         "transcribed": text_transcribed.strip(),
         "expected": text_expected.strip(),
-        "match": text_expected.strip().lower() == text_transcribed.strip().lower(),
-        "audio_path": f"/recordings/{filename}"
+        "match": text_expected.strip().lower() == text_transcribed.strip().lower()
     })
-
-@app.route('/recordings/<filename>')
-def uploaded_file(filename):
-    return send_from_directory("recordings", filename)
 
 if __name__ == "__main__":
     os.makedirs("recordings", exist_ok=True)

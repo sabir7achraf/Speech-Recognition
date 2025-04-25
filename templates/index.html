@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>قراءة وتسجيل</title>
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <h1>اقرأ الجملة التالية:</h1>
+    <p id="randomText">{{ random_text }}</p>
+
+    <button id="startBtn">▶️ ابدأ التسجيل</button>
+    <button id="stopBtn" disabled>⏹️ إيقاف</button>
+
+    <h2>النتائج:</h2>
+    <div id="resultText"></div>
+</body>
+</html>
